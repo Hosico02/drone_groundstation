@@ -1,0 +1,13 @@
+PyQt5
+requests
+folium
+opencv-python
+numpy
+cvzone
+ultralytics
+telegram
+cryptography
+python-dotenv
+filelock
+pyserial
+pymavlink

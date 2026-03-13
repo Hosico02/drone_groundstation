@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        #map_dfab4e411abc1351941f03143cb0878f {
+            position: relative;
+            width: 100.0%;
+            height: 100.0%;
+            left: 0.0%;
+            top: 0.0%;
+        }
+        .leaflet-container { font-size: 1rem; }
+    </style>
+
+    <style>
+        html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+        }
+    </style>
+
+    <style>
+        #map {
+            position:absolute;
+            top:0;
+            bottom:0;
+            right:0;
+            left:0;
+        }
+    </style>
+
+    <script>
+        L_NO_TOUCH = false;
+        L_DISABLE_3D = false;
+    </script>
+
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.css"/>
+</head>
+<body>
+    
+    <div class="folium-map" id="map_dfab4e411abc1351941f03143cb0878f" ></div>
+        
+</body>
+<script>
+
+    var map_dfab4e411abc1351941f03143cb0878f = L.map(
+        "map_dfab4e411abc1351941f03143cb0878f",
+        {
+            center: [30.5928, 104.3055],
+            crs: L.CRS.EPSG3857,
+            ...{
+                "zoom": 13,
+                "zoomControl": true,
+                "preferCanvas": false,
+            }
+        }
+    );
+
+    var tile_layer_02b6498dcdc997b63382d62a038d2a21 = L.tileLayer(
+        "https://webst02.is.autonavi.com/appmaptile?style=6\u0026x={x}\u0026y={y}\u0026z={z}",
+        {
+            "minZoom": 0,
+            "maxZoom": 18,
+            "maxNativeZoom": 18,
+            "noWrap": false,
+            "attribution": "\u9ad8\u5fb7\u536b\u661f\u5730\u56fe",
+            "subdomains": "abc",
+            "detectRetina": false,
+            "tms": false,
+            "opacity": 1,
+        }
+    );
+        
+    
+    tile_layer_02b6498dcdc997b63382d62a038d2a21.addTo(map_dfab4e411abc1351941f03143cb0878f);
+
+    var geocoderOpts_geocoder_5b525a97f5a781b895f0772606a578c6 = {
+        "collapsed": false,
+        "position": "topright",
+        "defaultMarkGeocode": true,
+        "zoom": 11,
+        "provider": "nominatim",
+        "providerOptions": {
+        },
+    };
+
+    // note: geocoder name should start with lowercase
+    var geocoderName_geocoder_5b525a97f5a781b895f0772606a578c6 = geocoderOpts_geocoder_5b525a97f5a781b895f0772606a578c6["provider"];
+
+    var customGeocoder_geocoder_5b525a97f5a781b895f0772606a578c6 = L.Control.Geocoder[ geocoderName_geocoder_5b525a97f5a781b895f0772606a578c6 ](
+        geocoderOpts_geocoder_5b525a97f5a781b895f0772606a578c6['providerOptions']
+    );
+    geocoderOpts_geocoder_5b525a97f5a781b895f0772606a578c6["geocoder"] = customGeocoder_geocoder_5b525a97f5a781b895f0772606a578c6;
+
+    L.Control.geocoder(
+        geocoderOpts_geocoder_5b525a97f5a781b895f0772606a578c6
+    ).on('markgeocode', function(e) {
+        var zoom = geocoderOpts_geocoder_5b525a97f5a781b895f0772606a578c6['zoom'] || map_dfab4e411abc1351941f03143cb0878f.getZoom();
+        map_dfab4e411abc1351941f03143cb0878f.setView(e.geocode.center, zoom);
+    }).addTo(map_dfab4e411abc1351941f03143cb0878f);
+
+    var measure_control_2abf2bb50a255d6cc8c8caeec253160b = new L.Control.Measure({
+        "position": "topright",
+        "primaryLengthUnit": "meters",
+        "secondaryLengthUnit": "miles",
+        "primaryAreaUnit": "sqmeters",
+        "secondaryAreaUnit": "acres",
+    });
+
+    map_dfab4e411abc1351941f03143cb0878f.addControl(measure_control_2abf2bb50a255d6cc8c8caeec253160b);
+
+    // Workaround for using this plugin with Leaflet>=1.8.0
+    // https://github.com/ljagis/leaflet-measure/issues/171
+    L.Control.Measure.include({
+        _setCaptureMarkerIcon: function () {
+            // disable autopan
+            this._captureMarker.options.autoPanOnFocus = false;
+            // default function
+            this._captureMarker.setIcon(
+                L.divIcon({
+                    iconSize: this._map.getSize().multiplyBy(2)
+                })
+            );
+        },
+    });
+
+    var options = {
+        position: "topleft",
+        draw: {},
+        edit: {},
+    }
+    // FeatureGroup is to store editable layers.
+    var drawnItems_draw_control_6e9e5f271c4d47803f8919fc0e01ea30 =
+        new L.featureGroup().addTo(
+            map_dfab4e411abc1351941f03143cb0878f
+        );
+
+    options.edit.featureGroup = drawnItems_draw_control_6e9e5f271c4d47803f8919fc0e01ea30;
+    var draw_control_6e9e5f271c4d47803f8919fc0e01ea30 = new L.Control.Draw(
+        options
+    ).addTo( map_dfab4e411abc1351941f03143cb0878f );
+            map_dfab4e411abc1351941f03143cb0878f.on(L.Draw.Event.CREATED, function(e) {
+                var layer = e.layer,
+                    type = e.layerType;
+                var coords = JSON.stringify(layer.toGeoJSON());
+                layer.on('click', function() {
+                    alert(coords);
+                    console.log(coords);
+                });
+                drawnItems_draw_control_6e9e5f271c4d47803f8919fc0e01ea30.addLayer(layer);
+            });
+            map_dfab4e411abc1351941f03143cb0878f.on('draw:created', function(e) {
+                drawnItems_draw_control_6e9e5f271c4d47803f8919fc0e01ea30.addLayer(e.layer);
+            });
+
+            
+        
+    
+                var lat_lng_popup_56a83a77d66a2fee4b9b157d3f5a5664 = L.popup();
+                function latLngPop(e) {
+                    lat_lng_popup_56a83a77d66a2fee4b9b157d3f5a5664
+                        .setLatLng(e.latlng)
+                        .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
+                                    "<br>Longitude: " + e.latlng.lng.toFixed(4))
+                        .openOn(map_dfab4e411abc1351941f03143cb0878f);
+                    }
+                map_dfab4e411abc1351941f03143cb0878f.on('click', latLngPop);
+            
+    
+    var mouse_position_3fd6797e45ba1d1ae19cda82b6120fae = new L.Control.MousePosition(
+                {
+  "position": "topright",
+  "separator": " | ",
+  "emptyString": "\u9f20\u6807\u5212\u52a8\u663e\u793a\u7ecf\u7eac\u5ea6",
+  "lngFirst": false,
+  "numDigits": 20,
+  "prefix": "\u7ecf\u7eac\u5ea6\uff1a",
+}
+            );
+            mouse_position_3fd6797e45ba1d1ae19cda82b6120fae.options["latFormatter"] =
+                function(num) {return L.Util.formatNum(num, 4) + ' A° '};
+            mouse_position_3fd6797e45ba1d1ae19cda82b6120fae.options["lngFormatter"] =
+                function(num) {return L.Util.formatNum(num, 4) + ' A° '};
+            map_dfab4e411abc1351941f03143cb0878f.addControl(mouse_position_3fd6797e45ba1d1ae19cda82b6120fae);
+        
+    
+            tile_layer_02b6498dcdc997b63382d62a038d2a21.addTo(map_dfab4e411abc1351941f03143cb0878f);
+        
+</script>
+</html>
